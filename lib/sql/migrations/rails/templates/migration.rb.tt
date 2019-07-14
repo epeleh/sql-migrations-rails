@@ -1,0 +1,23 @@
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+  def up
+  <%- if up_migration -%>
+    # <%= 'db/migrate/' + up_migration.basename.to_s %>
+    execute <<-SQL
+<%= up_migration.read.strip.gsub(/^/, ' ' * 6) %>
+    SQL
+  <%- else -%>
+    raise ActiveRecord::IrreversibleMigration
+  <%- end -%>
+  end
+
+  def down
+  <%- if down_migration -%>
+    # <%= 'db/migrate/' + down_migration.basename.to_s %>
+    execute <<-SQL
+<%= down_migration.read.strip.gsub(/^/, ' ' * 6) %>
+    SQL
+  <%- else -%>
+    raise ActiveRecord::IrreversibleMigration
+  <%- end -%>
+  end
+end

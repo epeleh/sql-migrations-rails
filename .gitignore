@@ -1,0 +1,8 @@
+.bundle/
+pkg/
+rdoc/
+log/
+test/
+.idea/
+Gemfile.lock
+.rake_tasks~
